@@ -5,7 +5,9 @@
 
 	Why are we doing this ?
 	Cause with respect to finding primes, there are lesser primes as the range of values increase. You find more  prime numbers near the
-	lower end region compared to the higher end region. Hence the threads working on the lower end region during batching seem to finish
+	lower end region compared to the higher end region and for the reason that as we calculate till square root of a number, square roots for
+	larger numbers as we go high are bigger than smaller numbers at the lower end region.
+	Hence the threads working on the lower end region during batching seem to finish
 	faster than the ones on the higher ends as they find more prime numbers (need not traverse till sqrt of n for most numbers)
 
 
