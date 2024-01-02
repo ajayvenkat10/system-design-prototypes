@@ -1,7 +1,7 @@
 /*
 	In this program, we try to keep all threads busy for an equal amount of time by including a variable that holds the current value
 	for which prime is to be found for any thread that picks it. This way each thread is constantly working on something and is not
-	free coparing to us batching the threads in the unfair approach
+	free comparing to us batching the threads in the unfair approach
 
 	Why are we doing this ?
 	Cause with respect to finding primes, there are lesser primes as the range of values increase. You find more  prime numbers near the
