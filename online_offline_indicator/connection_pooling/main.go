@@ -135,8 +135,10 @@ Get connection from the blocking queue on pool and reduce the pool size by 1 by 
 We implenent queue using a list. Remove from front (0th index) add from back (append).
 */
 func (cPool *ConnectionPool) Get() *Connection {
-	// Emit from the channel. This emit will succeed if there is atleast one item in the channel.
-	// If not then the process will wait here until an item is put into the channel.
+	/*
+		Emit from the channel. This emit will succeed if there is atleast one item in the channel.
+		If not then the process will wait here until an item is put into the channel.
+	*/
 	<-cPool.channel
 
 	cPool.mutexLock.Lock()
