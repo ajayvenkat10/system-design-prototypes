@@ -1,0 +1,6 @@
+go 1.21.5
+
+use (
+	./multi_threading_benchmark
+	./online_offline_indicator
+)
