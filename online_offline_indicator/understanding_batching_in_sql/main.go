@@ -74,6 +74,7 @@ const HEARTBEAT_TIMEOUT_SECONDS = 30
 var DB *sql.DB
 
 func init() {
+	// Example DB Data: "host=localhost port=5432 dbname=online_offline_indicator user=postgres password=postgres123")
 	_db, err := sql.Open("pgx", os.Getenv("DB_DATA"))
 	if err != nil {
 		panic(err)
