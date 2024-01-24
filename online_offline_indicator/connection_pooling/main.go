@@ -79,6 +79,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"os"
 	"sync"
 	"time"
 
@@ -122,7 +123,8 @@ func newConnectionPool(maxConnections int) *ConnectionPool {
 
 // Establish connection with a postgres database
 func newConnection() *sql.DB {
-	_db, err := sql.Open("pgx", "host=localhost port=5432 dbname=online_offline_indicator user=postgres password=123wiki&*(")
+	// Example DB Data: "host=localhost port=5432 dbname=online_offline_indicator user=postgres password=postgres123")
+	_db, err := sql.Open("pgx", os.Getenv("DB_DATA"))
 	if err != nil {
 		panic(err)
 	}

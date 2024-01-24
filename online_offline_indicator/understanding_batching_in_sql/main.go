@@ -60,6 +60,7 @@ package main
 
 import (
 	"database/sql"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -73,7 +74,7 @@ const HEARTBEAT_TIMEOUT_SECONDS = 30
 var DB *sql.DB
 
 func init() {
-	_db, err := sql.Open("pgx", "host=localhost port=5432 dbname=online_offline_indicator user=postgres password=123wiki&*(")
+	_db, err := sql.Open("pgx", os.Getenv("DB_DATA"))
 	if err != nil {
 		panic(err)
 	}
