@@ -51,8 +51,8 @@ Approach: (Lets say we are working with an SQL Database)
 	Takeaways:
 
 	1. Reduce the number of API calls by batching wherever possible. Saves time and reduces load on your API server.
-	2. Batch efficiently by reducing the number of read/write calls to your database to reduce the load on the database and in turn improve the speed or response.
-		Try to optimize of batch reads/writes than a read/write for ever user/request
+	2. Batch efficiently by reducing the number of read/write calls to your database to reduce the load on the database and in turn improve the speed of response.
+		Try to optimize for batch reads/writes than a read/write for every user/request
 
 */
 
