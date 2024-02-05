@@ -14,7 +14,7 @@
 	Connection time/Large Update  - 1ms / 100ms
 	Connection time/Micro Update  - 1ms / 2ms
 
-	In teh above case you can see that connection time is 1% of query time in case of a large update which is not so large, but the connection time is
+	In the above case you can see that connection time is 1% of query time in case of a large update which is not so large, but the connection time is
 	is 50% of the query execution time in case of a micro update.
 
 	To overcome this we use connection pooling.
