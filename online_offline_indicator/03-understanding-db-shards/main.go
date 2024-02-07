@@ -2,12 +2,13 @@ package main
 
 import (
 	"database/sql"
+	"os"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
-	_ "github.com/jackc/pgx/v5/stdlib"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 const HEARTBEAT_TIMEOUT_SECONDS = 30
@@ -15,13 +16,14 @@ const HEARTBEAT_TIMEOUT_SECONDS = 30
 var DBs []*sql.DB
 
 func init() {
-	_dB, err := sql.Open("pgx", "host=localhost port=5432 dbname=online_offline_indicator user=postgres password=123wiki&*(")
+	// For eg "root:abcd@tcp(localhost:3306)/online_offline_indicator"
+	_dB, err := sql.Open("mysql", os.Getenv("SQL_DB_DATA"))
 	if err != nil {
 		panic(err)
 	}
 	DBs = append(DBs, _dB)
 
-	_dB, err = sql.Open("pgx", "host=localhost port=5432 dbname=online_offline_indicator_slave user=postgres password=123wiki&*(")
+	_dB, err = sql.Open("mysql", os.Getenv("SQL_DB_DATA"))
 	if err != nil {
 		panic(err)
 	}
@@ -51,7 +53,7 @@ func main() {
 		request := make(map[string]interface{})
 		ctx.Bind(&request)
 
-		query := `INSERT INTO online_offline (user_id, last_heartbeat) VALUES ($1, $2) ON CONFLICT (user_id) DO UPDATE SET last_heartbeat = EXCLUDED.last_heartbeat`
+		query := "REPLACE INTO online_offline (user_id, last_heartbeat) VALUES (?, ?);"
 
 		DB := DBs[getShardIndex(strconv.Itoa(int(request["user_id"].(float64))))]
 
@@ -66,7 +68,7 @@ func main() {
 	ge.GET("/heartbeats/status/:user_id", func(ctx *gin.Context) {
 		var lastHeartbeat int
 
-		query := `SELECT last_heartbeat FROM online_offline WHERE user_id = $1`
+		query := "SELECT last_heartbeat FROM online_offline WHERE user_id = ?;"
 
 		DB := DBs[getShardIndex(ctx.Param("user_id"))]
 
