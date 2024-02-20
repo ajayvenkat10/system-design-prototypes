@@ -204,7 +204,7 @@ func benchmarkWithConnectionPool(concurrentConnections int) {
 	fmt.Println("Benchmark: With Connection Pool for ", concurrentConnections, "connections -> ", time.Since(startTime))
 }
 
-// Can perform any query. Just calling sleep for 10 seconds for each connection.
+// Can perform any query. Just calling sleep for 10 miliseconds for each connection.
 func createConnectionAndSleep(wg *sync.WaitGroup) {
 	defer wg.Done()
 
